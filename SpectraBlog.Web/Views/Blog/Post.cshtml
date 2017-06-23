@@ -1,0 +1,47 @@
+﻿@using SpectraBlog.Web.Models
+@model SpectraBlog.Web.Models.Post
+    
+@{
+    ViewBag.Title = "Post";
+ 
+}
+
+<h2>@Model.Title</h2>
+
+<p>@Model.Summary</p>
+@Model.Content.Markdown();
+
+<p>@Model.Content</p>
+
+
+<h3>Comments</h3>
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="comment">
+        <small>@comment.Created | @comment.Autor</small>
+        <p>@comment.Content</p>
+        <hr />
+
+
+
+
+    </div>
+
+}
+
+@using (Html.BeginForm())
+{
+
+<p>Автор: @Html.TextBox("NewComment.Autor")</p>
+
+<p>Коментар: @Html.TextArea("New.Comment.Content")</p>
+
+<p><input type="submit" value="Добави коментар"/></p>
+
+
+
+
+}
+
+@Html.ActionLink("Back", "Index")
